@@ -6,15 +6,17 @@
 #from a youtube transcript scroll box and saved in a text file 
 
 clean_and_save <- function(raw_file_path, clean_file_path){
+  require(qdap)
   if(file.info(raw_file_path)$isdir == TRUE){
     for(f in list.files(raw_file_path)){
-      text <- paste(readLines(f), collapse = " ")
+      text <- paste(readLines(paste(raw_file_path, f, sep = "/")), collapse = " ")
       text <- bracketX(text)
-      write(x = text, file = paste(clean_file_path, f, sep = "/"))
+      temp_name <- sub(pattern = "_raw.txt", replacement = "_clean.txt", x = f)
+      write(x = text, file = paste(clean_file_path, temp_name, sep = "/"))
     }
   }
   if(file.info(raw_file_path)$isdir == FALSE){
-    text <- paste(readLines(raw_file_path, collapse = " "))
+    text <- paste(readLines(raw_file_path), collapse = " ")
     text <- bracketX(text)
     write(x = text, file = clean_file_path)
   }
