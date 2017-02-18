@@ -28,15 +28,15 @@ b0 <- y_mean - (b1 * x_mean)
 df$y_pred <- b0 + (b1 * df$x) #predicted values based on the estimated coefficients 
 df$residuals <- df$y - df$y_pred #residuals: difference between the observed outcome scores and the predicted values 
 df$residuals2 <- df$residuals^2 #residuals sqaured 
-df$model_error <- df$y_pred - y_mean
-df$model_error2 <- df$model_error^2
+df$model_error <- df$y_pred - y_mean #model error 
+df$model_error2 <- df$model_error^2 #model error sqaured 
 
 ##overall model fit 
 rss <- sum(df$residuals2) #residual sum of sqaures 
 mss <- sum(df$model_error2) #model sum of sqaures 
 tss <- rss + mss #total sum of sqaures; or sum(df$y_dev2), the summ of sqaured outcome deviation scores 
 rse <- sqrt(rss/(length(df$y)-2)) #residual standard error 
-r_sq <- (tss - rss)/tss #r-sqaured value 
+r_sq <- (tss - rss)/tss #r-squared value 
 
 b0_se <- rse * sqrt((1/length(df$x)) + (x_mean^2/sum(df$x_dev2))) #standard error of the intercept
 b1_se <- rse/sqrt(sum(df$x_dev2)) #standard error of the slope 
