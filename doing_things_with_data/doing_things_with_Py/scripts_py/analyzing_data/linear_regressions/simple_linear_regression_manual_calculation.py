@@ -67,9 +67,13 @@ r_sq = (tss - rss)/tss
 b0_se = rse * (((1/len(x)) + (x_mean**2/sum(x_dev2))) ** (1/2.0))
 b1_se = rse/((sum(x_dev2) ** (1/2.0)))
 
+f = (mss/1)/(rss/(len(x)-2)) #f-statistic 
+#with simiple linear regressions the f-statistic can be found by squaring the t-statistic for the slope
 
 ####assessing predictive value
 b0_t = (b0 - 0)/b0_se
 b1_t = (b1 - 0)/b1_se
 
 
+#predicted outcome based on new predictor value (e.g. 12)
+new_y1 = b0 + (b1 * 12)

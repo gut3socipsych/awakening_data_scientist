@@ -41,6 +41,10 @@ r_sq <- (tss - rss)/tss #r-squared value
 b0_se <- rse * sqrt((1/length(df$x)) + (x_mean^2/sum(df$x_dev2))) #standard error of the intercept
 b1_se <- rse/sqrt(sum(df$x_dev2)) #standard error of the slope 
 
+f <- (mss/1)/(rss/(length(df$x)-2)) #f-statistic 
+#with simple linear regressions the f-statistic can be found by squaring the t-statistic
+f_pval <- pf(q = f, df1 = 1, df2 = length(df$x)-2, lower.tail = F)
+
 ###assessing predictive value
 b0_t <- (b0 - 0)/b0_se
 b0_t_pval <- 2 * pt(-abs(b0_t), df = length(df$x)-2)
