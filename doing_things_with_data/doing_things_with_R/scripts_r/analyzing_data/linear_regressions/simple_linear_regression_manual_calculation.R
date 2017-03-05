@@ -7,7 +7,7 @@ y <- x + sample(x = 1:10, size = 10, replace = T) #outcome values
 df <- data.frame(x, y)
 df
 
-###descriptive statistic calculations 
+###central tendency and variability statistic calculations 
 ##mean values for predictor and outcome variables
 x_mean <- mean(df$x)
 y_mean <- mean(df$y)
