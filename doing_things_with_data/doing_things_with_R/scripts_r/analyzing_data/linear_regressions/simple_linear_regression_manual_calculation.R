@@ -19,6 +19,31 @@ df$x_dev2 <- df$x_dev^2 #x deviance scores sqaured
 df$y_dev2 <- df$y_dev^2 #y deviance scores sqaured
 df$xy_dev <- df$x_dev * df$y_dev #product of x deviance and y deviance scores 
 
+#plots of deviation scores 
+#helper function 
+dev_plot <- function(variable, plot_title = "Deviation from the Mean"){
+  variable_length <- length(variable)
+  variable_mean <- mean(variable, na.rm = T)
+  variable_dev <- variable - variable_mean 
+  
+  plot(variable, main = plot_title, xlab = "Observation", ylab = "Values")
+  axis(side = 1, at = 1:variable_length)
+  abline(h = variable_mean)
+  segments(x0 = 1:variable_length, y0 = variable, x1 = 1:variable_length, y1 = variable_mean, col = "red")
+  lab_pos <- vector()
+  for(i in 1:variable_length){
+    if(variable[i] < variable_mean){
+      lab_pos <- append(x = lab_pos, values = variable_mean + 3)
+    }else{
+      lab_pos <- append(x = lab_pos, values = variable_mean - 3)
+    }
+  }
+  text(x = 1:variable_length, y = lab_pos, labels = round(variable_dev, digits = 1), cex = .75, col = "red")
+}
+
+dev_plot(df$x) #deviation from mean x values 
+dev_plot(df$y) #deviation from mean y values 
+
 ###estimating the coefficients 
 b1 <- sum(df$xy_dev)/sum(df$x_dev2)
 b0 <- y_mean - (b1 * x_mean)

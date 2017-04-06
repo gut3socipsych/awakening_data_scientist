@@ -18,6 +18,7 @@ def get_tags(url):
     df.columns = ["name","attrs"]
     df = df.drop_duplicates()
     df = df.sort_values(by = "name")
-    print("From", len(names), "HTML tags ", "Found", len(df), "HTML tags with unique attributes.") 
+    print(url, "contains", len(names), "HTML tags:", len(df), "tags with unique attributes.")
     return(df)
+
 
