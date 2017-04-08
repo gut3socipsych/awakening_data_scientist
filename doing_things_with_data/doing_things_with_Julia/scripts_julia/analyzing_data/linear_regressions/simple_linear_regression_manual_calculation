@@ -1,0 +1,48 @@
+####simple linear regression (manual calculation)####
+
+###data
+x = [7,10,15,23,6,23,24,17,16,2]
+y = [10,12,22,27,14,28,32,27,20,10]
+
+###descriptive statistic calculations
+##mean values for predictor and outcome variables
+x_mean = mean(x)
+y_mean = mean(y)
+
+##deviation scores
+#x deviation scores
+x_dev = x - x_mean
+#y deviation scores
+y_dev = y - y_mean
+#x deviation scores squared
+x_dev2 = []
+for i in x_dev push!(x_dev2, i ^ 2) end
+#y deviation scores squared
+y_dev2 = []
+for i in y_dev push!(y_dev2, i ^ 2) end
+#product of x deviation and y deviation scores
+xy_dev = []
+for i in 1:length(x_dev) push!(xy_dev, x_dev[i]*y_dev[i]) end
+
+###estimating the coefficients
+#slope
+b1 = sum(xy_dev)/sum(x_dev2)
+#intercept
+b0 = y_mean - (b1 * x_mean)
+
+###evaluating the model
+##predicted values and error
+#predicted values based on the estimated coefficients
+y_pred = []
+for i in x push!(y_pred, b0 + (b1 * i)) end
+#residuals: difference between the observed outcome scores and the predicted values
+residuals = []
+for i in 1:length(y) push!(residuals, y[i] - y_pred[i]) end
+#residuals squared
+residuals2 = []
+for i in residuals push!(residuals2, i ^ 2) end
+#model error
+model_error = y_pred = y_mean
+#model error squared
+model_error2 = []
+for i in model_error push!(model_error2, i ^ 2) end
