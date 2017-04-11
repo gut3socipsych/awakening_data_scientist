@@ -1,0 +1,9 @@
+####simple linear regression simple example####
+###packages
+using MultivariateStats
+
+###data
+x = [7,10,15,23,6,23,24,17,16,2]
+y = [10,12,22,27,14,28,32,27,20,10]
+
+mod = llsq(x, y)

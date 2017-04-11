@@ -5,6 +5,7 @@ set.seed(1) #set seed for reproducibility
 x <- sample(x = 1:25, size = 10, replace = T) #predictor values 
 y <- x + sample(x = 1:10, size = 10, replace = T) #outcome values 
 df <- data.frame(x, y)
+rm(x, y) #just cleaning up 
 df
 
 ###central tendency and variability statistic calculations 
@@ -19,7 +20,7 @@ df$x_dev2 <- df$x_dev^2 #x deviance scores sqaured
 df$y_dev2 <- df$y_dev^2 #y deviance scores sqaured
 df$xy_dev <- df$x_dev * df$y_dev #product of x deviance and y deviance scores 
 
-#plots of deviation scores 
+#plots of deviation scores #########
 #helper function 
 dev_plot <- function(variable, plot_title = "Deviation from the Mean"){
   variable_length <- length(variable)
@@ -41,8 +42,11 @@ dev_plot <- function(variable, plot_title = "Deviation from the Mean"){
   text(x = 1:variable_length, y = lab_pos, labels = round(variable_dev, digits = 1), cex = .75, col = "red")
 }
 
+plot(y~x, data = df); axis(side = 1, at = 1:max(df$x))
 dev_plot(df$x) #deviation from mean x values 
 dev_plot(df$y) #deviation from mean y values 
+
+######
 
 ###estimating the coefficients 
 b1 <- sum(df$xy_dev)/sum(df$x_dev2)
