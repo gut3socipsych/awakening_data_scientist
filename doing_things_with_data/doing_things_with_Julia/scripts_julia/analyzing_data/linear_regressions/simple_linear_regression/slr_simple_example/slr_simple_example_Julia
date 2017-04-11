@@ -1,9 +1,12 @@
 ####simple linear regression simple example####
 ###packages
-using MultivariateStats
+using GLM
+using DataFrames
 
 ###data
 x = [7,10,15,23,6,23,24,17,16,2]
 y = [10,12,22,27,14,28,32,27,20,10]
+df = DataFrame(x = x, y = y)
 
-mod = llsq(x, y)
+mod = glm(@formula(y ~ x), df, Normal())
+print(mod)
