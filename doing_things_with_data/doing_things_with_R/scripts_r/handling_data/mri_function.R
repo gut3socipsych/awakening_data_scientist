@@ -14,7 +14,7 @@ mri <- function(data, combined_variable_name = "combined_variable"){
       choice_base <- rep(x = "0", times = colnum)
       choice_base[choice_perm[p,]] <- "1"
       choice_cats$code <- append(choice_cats$code, paste(choice_base, collapse = ""))
-      choice_cats$name <- append(choice_cats$name, list(sort(colnames(data)[ps[p,]])))
+      choice_cats$name <- append(choice_cats$name, list(sort(colnames(data)[choice_perm[p,]])))
     }
   }
   for(choice_name in 1:length(choice_cats$name)){
