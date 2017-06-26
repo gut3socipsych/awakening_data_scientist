@@ -1,4 +1,4 @@
-###Doing things with R
+# Doing things with R
 
 The "Doing Things with R" (DTR) files contain scripts using various base R tools, installed packages, and helper functions for getting, handling, and analyzing (with visualization) data.  The DTR scripts are a work in progress and are often changed are modified for various reasons (e.g. updated packages, improved coding, etc.).  
 
