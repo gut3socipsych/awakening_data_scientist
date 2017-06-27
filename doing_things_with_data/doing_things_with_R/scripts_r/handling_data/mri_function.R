@@ -75,7 +75,7 @@ mri_series <- function(data, response_labels){
   #results 
   results <- vector()
   for(r in 1:nrow(data)){
-    results <- append(x = results, values = colanems(data)[which.max(data[r,])])
+    results <- append(x = results, values = colnames(data)[which.max(data[r,])])
   }
   return(results)
 }
