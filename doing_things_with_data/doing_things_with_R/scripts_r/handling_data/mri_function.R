@@ -67,4 +67,15 @@ group_and_factor <- function(variable, b = 2){
   return(cut_var)
 }
 
-
+###create factor variable from progressive yes/no (binary) responses 
+mri_series <- function(data, response_labels){
+  #process data# 
+  data[data!=1] <- 2 
+  colnames(data) <- response_labels
+  #results 
+  results <- vector()
+  for(r in 1:nrow(data)){
+    results <- append(x = results, values = colanems(data)[which.max(data[r,])])
+  }
+  return(results)
+}
