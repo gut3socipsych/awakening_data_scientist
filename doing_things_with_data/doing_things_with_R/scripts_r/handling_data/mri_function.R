@@ -1,9 +1,21 @@
 ####multiple response item function####
-mri <- function(data, combined_variable_name = "combined_variable"){
+###select one option 
+mri_selectone <- function(data, response_labels = colnames(data), combined_variable_name = "new"){
+  data[data!=1] <- NA 
+  colnames(data) <- response_labels 
+  data$new <- colnames(data)[max.col(!is.na(data))]
+  colnames(data)[length(data)] <- combined_variable_name
+  return(data[length(data)])
+}
+
+###select all that apply option 
+mri_selectall <- function(data, response_labels = colnames(data), combined_variable_name = "combined_variable"){
   #require gtools#
   require(gtools)
   
   #function objects#
+  data[data!=1] <- 0
+  colnames(data) <- response_labels
   colnum <- length(colnames(data))
   
   #categorize choices#
@@ -37,8 +49,22 @@ mri <- function(data, combined_variable_name = "combined_variable"){
                               values = choice_cats$name[which(response_code[i] == choice_cats$code)])
   }
   
-  data$response_factor <- response_factor
+  data$new <- response_factor
   colnames(data)[length(colnames(data))] <- combined_variable_name
-  return(data)
+  return(data[length(data)])
 }
+
+###create divided ranges and convert to factor variable 
+group_and_factor <- function(variable, b = 2){
+  cut_var <- cut(x = variable, breaks = b, ordered_result = T) 
+  cut_levels <- levels(cut_var)
+  cut_labels <- vector()
+  for(i in 1:length(cut_levels)){
+    cut_labels <- append(x = cut_labels, 
+                         values = paste(as.numeric(unlist(strsplit(gsub(x = cut_levels[i], pattern = "[(]|[]]", replacement = ""), split = ","))), collapse = " to "))
+  }
+  levels(cut_var) <- cut_labels
+  return(cut_var)
+}
+
 
