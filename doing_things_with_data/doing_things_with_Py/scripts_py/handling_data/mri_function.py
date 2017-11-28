@@ -1,5 +1,14 @@
 import itertools, numpy as np, pandas as pd
 
+def mri_selectone(data, response_labels = None, combined_variable_name = "new"):
+    data[data != 1] = 0
+    results = []
+    for i in range(data.shape[0]):
+        results.append(format(data.iloc[i][data.iloc[i] == data.iloc[i].max()].keys()[0]))
+
+    results = pd.DataFrame(data = results, columns = [combined_variable_name])
+    return(results)
+
 def mri(data, combined_variable_name = "new"):
     #function objects#
     colnum = data.shape[1]
